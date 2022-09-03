@@ -1,7 +1,9 @@
-(rule
- (alias runtest)
- (deps ../src/examples/fib.exe)
- (targets fib.trace)
- (mode promote)
- (action
-  (run olly trace fib.trace "../src/examples/fib.exe 2")))
+; Uncomment to run
+
+; (rule
+;  (alias runtest)
+;  (deps ../src/examples/fib.exe)
+;  (targets fib.trace)
+;  (mode promote)
+;  (action
+;   (run olly trace fib.trace "../src/examples/fib.exe 2")))

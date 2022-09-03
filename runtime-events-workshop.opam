@@ -16,6 +16,5 @@ depends: [
 
   # Tools needed for demonstration, but not strictly for the OCaml source code in this repository   
   "runtime_events_tools" {= "0.3"}
-  "ec"                   {= "dev"}
 ]
 synopsis: "A ppx deriver for generating GraphQL schemas and arguments from OCaml types."

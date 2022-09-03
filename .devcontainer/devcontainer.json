@@ -1,0 +1,10 @@
+{
+    "name": "Runtime Events Workshop",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "extensions": [
+        "ocamllabs.ocaml-platform"
+    ]
+}

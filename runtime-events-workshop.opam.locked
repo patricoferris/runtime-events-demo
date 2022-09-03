@@ -1,0 +1,46 @@
+opam-version: "2.0"
+name: "runtime-events-workshop"
+version: "~dev"
+synopsis:
+  "A ppx deriver for generating GraphQL schemas and arguments from OCaml types."
+maintainer: "patrick@sirref.org"
+authors: ["Patrick Ferris" "Sadiq Jaffer"]
+license: "MIT"
+homepage: "https://github.com/patricoferris/runtime-events-workshop"
+bug-reports:
+  "https://github.com/patricoferris/runtime-events-workshop/issues"
+depends: [
+  "base-bigarray" {= "base"}
+  "base-domains" {= "base"}
+  "base-nnp" {= "base"}
+  "base-threads" {= "base"}
+  "base-unix" {= "base"}
+  "bigarray-compat" {= "1.1.0"}
+  "cmdliner" {= "1.1.1"}
+  "conf-cmake" {= "1"}
+  "conf-libffi" {= "2.0.0"}
+  "conf-pkg-config" {= "2"}
+  "conf-zlib" {= "1"}
+  "ctypes" {= "0.20.1"}
+  "ctypes-foreign" {= "0.18.0"}
+  "domainslib" {= "0.4.2"}
+  "dune" {= "3.4.1"}
+  "hdr_histogram" {= "0.0.2"}
+  "integers" {= "0.7.0"}
+  "ocaml" {= "5.0.0"}
+  "ocaml-config" {= "3"}
+  "ocaml-variants" {= "5.0.0+trunk"}
+  "ocamlfind" {= "1.9.5"}
+  "runtime_events_tools" {= "0.3"}
+  "stdlib-shims" {= "0.3.0"}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+dev-repo: "git+https://github.com/patricoferris/runtime-events-workshop.git"
+pin-depends: [
+  "ocaml-variants.5.0.0+trunk"
+  "https://github.com/ocaml/ocaml/archive/5.0.tar.gz"
+]

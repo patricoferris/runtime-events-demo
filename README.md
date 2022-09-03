@@ -4,7 +4,7 @@ Runtime Events Workshop Demo
 A repository containing the source code for the Runtime Events Workshop demo presented at the [OCaml Workshop](https://icfp22.sigplan.org/home/ocaml-2022) as part of [ICFP 2022](https://icfp22.sigplan.org/) by [Sadiq Jaffer](https://github.com/sadiqj) and [Patrick Ferris](https://github.com/patricoferris).
 
 - [Runtime Events Workshop Demo](#runtime-events-workshop-demo)
-- [Set Up](#set-up)
+- [Setup](#setup)
 - [Introduction](#introduction)
 - [GC Stats](#gc-stats)
   - [The Runtime Events Library](#the-runtime-events-library)
@@ -16,9 +16,9 @@ A repository containing the source code for the Runtime Events Workshop demo pre
   - [GC Tail Latencies](#gc-tail-latencies)
   - [Perfetto Output](#perfetto-output)
 
-## Set Up
+## Setup
 
-This repository uses a `.devcontainer` to hopefully make reproducing the demonstration as straightforward as possible.
+This repository uses a `.devcontainer` to hopefully make reproducing the demonstration as straightforward as possible. Using [VSCode/VSCodium](https://github.com/VSCodium/vscodium) with remote containers should automatically open this repository in a devcontainer with all of the platform tools and plugins ready to go.
 
 ## Introduction
 
