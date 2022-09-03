@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (public_name gcstats)
+ (package runtime-events-workshop)
+ (libraries unix runtime_events))

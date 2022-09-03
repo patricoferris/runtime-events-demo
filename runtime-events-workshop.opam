@@ -1,0 +1,21 @@
+opam-version: "2.0"
+maintainer:   "patrick@sirref.org"
+authors:      ["Patrick Ferris" "Sadiq Jaffer"]
+license:      "MIT"
+homepage:     "https://github.com/patricoferris/runtime-events-workshop"
+bug-reports:  "https://github.com/patricoferris/runtime-events-workshop/issues"
+dev-repo:     "git+https://github.com/patricoferris/runtime-events-workshop.git"
+build: [
+ ["dune" "subst"] {dev}
+ ["dune" "build" "-p" name "-j" jobs]
+ ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+depends: [
+  "dune"               {>= "2.9.0"}
+  "domainslib"         {= "0.4.2"}
+
+  # Tools needed for demonstration, but not strictly for the OCaml source code in this repository   
+  "runtime_events_tools" {= "0.3"}
+  "ec"                   {= "dev"}
+]
+synopsis: "A ppx deriver for generating GraphQL schemas and arguments from OCaml types."

@@ -1,0 +1,1 @@
+FROM ocaml/opam:debian-11-ocaml-5.0@sha256:8ef27313193b5e003fce1c79624f1b5796508c672abdc6c2d24b4698ad92f398

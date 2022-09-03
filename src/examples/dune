@@ -1,0 +1,5 @@
+(executables
+ (names rogue_domain fib)
+ (public_names rogue_domain fib)
+ (package runtime-events-workshop)
+ (libraries domainslib))
