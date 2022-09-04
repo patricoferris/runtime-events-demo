@@ -5,6 +5,7 @@
         "context": ".."
     },
     "extensions": [
-        "ocamllabs.ocaml-platform"
+        "ocamllabs.ocaml-platform",
+        "yzhang.markdown-all-in-one"
     ]
 }

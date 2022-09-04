@@ -11,10 +11,19 @@ build: [
  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
 depends: [
-  "dune"               {>= "2.9.0"}
-  "domainslib"         {= "0.4.2"}
+  "dune"                {>= "2.9.0"}
+  "domainslib"          {= "0.4.2"}
+  "mdx"                 {with-test}
 
   # Tools needed for demonstration, but not strictly for the OCaml source code in this repository   
   "runtime_events_tools" {= "0.3"}
+  "ec"                   {= "dev"}
 ]
 synopsis: "A ppx deriver for generating GraphQL schemas and arguments from OCaml types."
+pin-depends: [
+  [ "websocket.dev" "git+https://github.com/patricoferris/ocaml-websocket#7d430001984250c6bdb834e4f8244f1497df97a9" ]
+  [ "websocket-eio.dev" "git+https://github.com/patricoferris/ocaml-websocket#7d430001984250c6bdb834e4f8244f1497df97a9" ]
+  [ "http.dev" "git+https://github.com/mirage/ocaml-cohttp#ce5f271b69fe42471ede858c5b8ce8203e3c14ad" ]
+  [ "cohttp-eio.dev" "git+https://github.com/mirage/ocaml-cohttp#ce5f271b69fe42471ede858c5b8ce8203e3c14ad" ]
+  [ "ec.dev" "git+https://github.com/patricoferris/eio-console#2de83889f37b5a329dedb5b12f1800b5d26acb9a" ]
+]

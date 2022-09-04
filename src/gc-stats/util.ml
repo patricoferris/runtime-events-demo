@@ -19,8 +19,8 @@ let rec pp_int_comma ppf n =
     Printf.printf ",%03d" (n mod 1000))
 
 let print_stats ~major ~minor_alloc ~minor_prom =
-  Printf.printf "major_alloc_shr: %aB, minor_alloc: %aB, minor prom: %aB\n%!"
-    pp_int_comma (words_to_bytes !major) pp_int_comma
+  Printf.printf "major_alloc_shr_req: %a, minor_alloc: %aB, minor prom: %aB\n%!"
+    pp_int_comma !major pp_int_comma
     (words_to_bytes !minor_alloc)
     pp_int_comma
     (words_to_bytes !minor_prom)

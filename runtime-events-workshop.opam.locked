@@ -10,29 +10,108 @@ homepage: "https://github.com/patricoferris/runtime-events-workshop"
 bug-reports:
   "https://github.com/patricoferris/runtime-events-workshop/issues"
 depends: [
+  "angstrom" {= "0.15.0"}
+  "astring" {= "0.8.5"}
+  "base" {= "v0.15.1~5.0preview"}
   "base-bigarray" {= "base"}
+  "base-bytes" {= "base"}
   "base-domains" {= "base"}
   "base-nnp" {= "base"}
   "base-threads" {= "base"}
   "base-unix" {= "base"}
+  "base64" {= "3.5.0"}
   "bigarray-compat" {= "1.1.0"}
+  "bigstringaf" {= "0.9.0"}
+  "brr" {= "0.0.3"}
+  "brr-lwd" {= "0.2"}
+  "camlp-streams" {= "5.0.1" & with-test}
   "cmdliner" {= "1.1.1"}
+  "cohttp" {= "5.0.0"}
+  "cohttp-eio" {= "dev"}
+  "conduit" {= "5.1.1"}
   "conf-cmake" {= "1"}
   "conf-libffi" {= "2.0.0"}
   "conf-pkg-config" {= "2"}
   "conf-zlib" {= "1"}
+  "cppo" {= "1.6.9"}
+  "crunch" {= "3.3.1"}
+  "csexp" {= "1.5.1"}
+  "cstruct" {= "6.1.1"}
   "ctypes" {= "0.20.1"}
   "ctypes-foreign" {= "0.18.0"}
+  "domain-name" {= "0.4.0"}
   "domainslib" {= "0.4.2"}
   "dune" {= "3.4.1"}
+  "dune-configurator" {= "3.4.1"}
+  "ec" {= "dev"}
+  "eio" {= "0.5"}
+  "eio_linux" {= "0.5"}
+  "eio_luv" {= "0.5"}
+  "eio_main" {= "0.5"}
+  "ezjsonm" {= "1.3.0"}
+  "fmt" {= "0.9.0"}
   "hdr_histogram" {= "0.0.2"}
+  "hex" {= "1.5.0"}
+  "hmap" {= "0.8.1"}
+  "http" {= "dev"}
   "integers" {= "0.7.0"}
+  "ipaddr" {= "5.3.1"}
+  "ipaddr-sexp" {= "5.3.1"}
+  "js_of_ocaml" {= "4.0.0.1~alpha-repo"}
+  "js_of_ocaml-compiler" {= "4.0.0.1~alpha-repo"}
+  "js_of_ocaml-ppx" {= "4.0.0.1~alpha-repo"}
+  "js_of_ocaml-toplevel" {= "4.0.0.1~alpha-repo"}
+  "jsonm" {= "1.0.1"}
+  "logs" {= "0.7.0"}
+  "luv" {= "0.5.11"}
+  "luv_unix" {= "0.5.0"}
+  "lwd" {= "0.2"}
+  "lwt" {= "5.6.1"}
+  "lwt-dllist" {= "1.0.1"}
+  "macaddr" {= "5.3.1"}
+  "magic-mime" {= "1.2.0"}
+  "mdx" {= "2.1.0" & with-test}
+  "menhir" {= "20220210"}
+  "menhirLib" {= "20220210"}
+  "menhirSdk" {= "20220210"}
+  "mtime" {= "1.4.0"}
+  "note" {= "0.0.2"}
+  "num" {= "1.4"}
   "ocaml" {= "5.0.0"}
+  "ocaml-base-compiler" {= "5.0.0~alpha1"}
+  "ocaml-compiler-libs" {= "v0.12.4"}
   "ocaml-config" {= "3"}
-  "ocaml-variants" {= "5.0.0+trunk"}
+  "ocaml-options-vanilla" {= "1"}
+  "ocaml-syntax-shims" {= "1.0.0"}
+  "ocaml-version" {= "3.5.0" & with-test}
+  "ocamlbuild" {= "0.14.1"}
   "ocamlfind" {= "1.9.5"}
+  "ocplib-endian" {= "1.2"}
+  "odoc-parser" {= "2.0.0" & with-test}
+  "optint" {= "0.2.0"}
+  "parsexp" {= "v0.15.0"}
+  "ppx_derivers" {= "1.2.1"}
+  "ppx_sexp_conv" {= "v0.15.1"}
+  "ppxlib" {= "0.27.0"}
+  "psq" {= "0.2.0"}
+  "ptime" {= "1.0.0"}
+  "re" {= "1.10.4"}
+  "result" {= "1.5"}
   "runtime_events_tools" {= "0.3"}
+  "seq" {= "base"}
+  "sexplib" {= "v0.15.1"}
+  "sexplib0" {= "v0.15.1"}
   "stdlib-shims" {= "0.3.0"}
+  "stringext" {= "1.6.0"}
+  "topkg" {= "1.0.5"}
+  "uchar" {= "0.0.2"}
+  "uri" {= "4.2.0"}
+  "uri-sexp" {= "4.2.0"}
+  "uring" {= "0.4"}
+  "uutf" {= "1.0.3"}
+  "websocket" {= "dev"}
+  "websocket-eio" {= "dev"}
+  "yojson" {= "2.0.2"}
 ]
 build: [
   ["dune" "subst"] {dev}
@@ -41,6 +120,44 @@ build: [
 ]
 dev-repo: "git+https://github.com/patricoferris/runtime-events-workshop.git"
 pin-depends: [
-  "ocaml-variants.5.0.0+trunk"
-  "https://github.com/ocaml/ocaml/archive/5.0.tar.gz"
+  [
+  "cohttp.5.0.0"
+  "https://github.com/mirage/ocaml-cohttp/releases/download/v5.0.0/cohttp-5.0.0.tbz"
+]
+  [
+  "cohttp-eio.dev"
+  "git+https://github.com/mirage/ocaml-cohttp#ce5f271b69fe42471ede858c5b8ce8203e3c14ad"
+]
+  [
+  "ec.dev"
+  "git+https://github.com/patricoferris/eio-console#2de83889f37b5a329dedb5b12f1800b5d26acb9a"
+]
+  [
+  "http.dev"
+  "git+https://github.com/mirage/ocaml-cohttp#ce5f271b69fe42471ede858c5b8ce8203e3c14ad"
+]
+  [
+  "js_of_ocaml.4.0.0.1~alpha-repo"
+  "https://github.com/ocsigen/js_of_ocaml/archive/ocaml-5.tar.gz"
+]
+  [
+  "js_of_ocaml-compiler.4.0.0.1~alpha-repo"
+  "https://github.com/ocsigen/js_of_ocaml/archive/ocaml-5.tar.gz"
+]
+  [
+  "js_of_ocaml-ppx.4.0.0.1~alpha-repo"
+  "https://github.com/ocsigen/js_of_ocaml/archive/ocaml-5.tar.gz"
+]
+  [
+  "js_of_ocaml-toplevel.4.0.0.1~alpha-repo"
+  "https://github.com/ocsigen/js_of_ocaml/archive/ocaml-5.tar.gz"
+]
+  [
+  "websocket.dev"
+  "git+https://github.com/patricoferris/ocaml-websocket#7d430001984250c6bdb834e4f8244f1497df97a9"
+]
+  [
+  "websocket-eio.dev"
+  "git+https://github.com/patricoferris/ocaml-websocket#7d430001984250c6bdb834e4f8244f1497df97a9"
+]
 ]

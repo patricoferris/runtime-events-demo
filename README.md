@@ -15,6 +15,8 @@ A repository containing the source code for the Runtime Events Workshop demo pre
 - [Runtime Events Tools](#runtime-events-tools)
   - [GC Tail Latencies](#gc-tail-latencies)
   - [Perfetto Output](#perfetto-output)
+- [Eio-console](#eio-console)
+  - [Web-browser Interface](#web-browser-interface)
 
 ## Setup
 
@@ -104,11 +106,12 @@ The `alloc` callback is currently only called on the instrumented runtime. Some 
 
 ### Runtime GC Counters
 
-With the GC-stats application we will just look are `EV_C_REQUEST_MAJOR_ALLOC_SHR`, `EV_C_MINOR_PROMOTED` and `EV_C_MINOR_ALLOCATED`. In fact, all we want to do is keep a cumulative count of words for each of these events.
+With the GC-stats application we will just look are `EV_C_REQUEST_MAJOR_ALLOC_SHR`, `EV_C_MINOR_PROMOTED` and `EV_C_MINOR_ALLOCATED`. In fact, all we want to do is keep a cumulative count of words for the minor allocated and promoted, and the number of times `alloc_shr` requested a major slice.
 
 <!-- $MDX file=src/gc-stats/main.ml,part=1 -->
 ```ocaml
-let runtime_counter (major, minor_prom, minor_alloc) _domain_id _ts counter value =
+let runtime_counter (major, minor_prom, minor_alloc) _domain_id _ts counter
+    value =
   match counter with
   | EV_C_REQUEST_MAJOR_ALLOC_SHR ->
       major := !major + value;
@@ -192,10 +195,10 @@ And that's all there is to GC-stats. All we need to do now is invoke a program w
 <!-- $MDX non-deterministic=output -->
 ```sh
 $ gcstats fib 2
-major_alloc_shr: 0B, minor_alloc: 0B, minor prom: 1,984B
-major_alloc_shr: 0B, minor_alloc: 1,984B, minor prom: 1,984B
-major_alloc_shr: 0B, minor_alloc: 1,984B, minor prom: 14,656B
-major_alloc_shr: 0B, minor_alloc: 40,064B, minor prom: 14,656B
+major_alloc_shr_req: 0, minor_alloc: 0B, minor prom: 1,984B
+major_alloc_shr_req: 0, minor_alloc: 1,984B, minor prom: 1,984B
+major_alloc_shr_req: 0, minor_alloc: 1,984B, minor prom: 23,552B
+major_alloc_shr_req: 0, minor_alloc: 40,000B, minor prom: 23,552B
 etc.
 ```
 
@@ -257,4 +260,17 @@ This produces a trace of the program using the phase events. You can see [this e
 The Runtime Events library is written in such a way as to be as generic as possible. The core principle is that [even in the presence of custom events](https://github.com/ocaml/ocaml/pull/11474), a consumer of Runtime Events should still work. This makes it possible to write library-specific consumer programs. 
 
 [Eio-console](https://github.com/patricoferris/eio-console) was built with the idea to display custom events for the direct-style, IO library [Eio](https://github.com/ocaml-multicore/eio). It was built before we had a custom events PR. Eio-console does show how you can write more complicated interfaces on top of Runtime Events.
+
+### Web-browser Interface
+
+Given the simplicity of the Runtime Events OCaml API, it is very easy to build more complicated user interfaces for exploring the events emitted by a running program. Eio-console does this by serialising the events to JSON and transporting them over an open [WebSocket](https://en.wikipedia.org/wiki/WebSocket) where a UI built with [js_of_ocaml](https://github.com/ocsigen/js_of_ocaml) allows users to, in real-time, see their running program. 
+
+Running a program is as simple as `gcstats` and `olly`.
+
+<!-- $MDX skip -->
+```sh
+$ ec exec "fib 2"
+```
+
+Here, again, we use the fibonacci program with two domains. The resulting dashboard looks something like:
 
