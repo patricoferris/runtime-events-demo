@@ -246,7 +246,7 @@ This output shows the different percenticles overall all runtime phases and the 
 
 Olly also has a tracing mode to output the runtime trace in a Chrome-trace compatible fashion. This is achieved with `olly trace`.
 
-<!-- $MDX non-deterministic=output -->
+<!-- $MDX skip -->
 ```sh
 $ olly trace fib.trace "fib 2"
 ```
@@ -274,3 +274,4 @@ $ ec exec "fib 2"
 
 Here, again, we use the fibonacci program with two domains. The resulting dashboard looks something like:
 
+![The Eio-console displaying graphs for minor allocated words and a list of runtime phases and lifecycle events](./docs/eio-console.png)
