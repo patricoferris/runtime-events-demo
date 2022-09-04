@@ -24,7 +24,7 @@ This repository uses a `.devcontainer` to hopefully make reproducing the demonst
 
 There are three demonstrations in this repository.
 
- - GC stats shows a simple program that runs an user-supplied program and monitors the total allocated minor words, promote minor words and major allocated words. The explanation below also goes into more detail about the program, the library `runtime_events` and the available probes. This is a good place to start if you are unfamiliar with continuous monitoring and the OCaml runtime.
+ - GC stats shows a simple program that runs a user-supplied program and monitors the total allocated minor words, promote minor words and major allocated words. The explanation below also goes into more detail about the program, the library `runtime_events` and the available probes. This is a good place to start if you are unfamiliar with continuous monitoring and the OCaml runtime.
  - Olly shows how you can use existing, released *runtime events tools* to monitor your program and investigate potential bugs.
  - Eio-console shows how you can build more complicated user interfaces for analysing programs.
 
@@ -68,7 +68,16 @@ type nonrec runtime_counter =
   | EV_C_REQUEST_MINOR_REALLOC_CUSTOM_TABLE
 ```
 
-These are the used in conjunction with the callback function to allow runtime events tool writers to differentiate between different events and their associated payloads.
+The runtime has been augmented in carefully choosen places to report specific events. For example within the `runtime/minor_gc.c` code we find the following.
+
+```c
+CAML_EV_COUNTER(EV_C_MINOR_PROMOTED,
+                Bsize_wsize(domain->allocated_words - prev_alloc_words));
+
+CAML_EV_COUNTER(EV_C_MINOR_ALLOCATED, minor_allocated_bytes);
+```
+
+These events are the used in conjunction with the callback function to allow runtime events tool writers to differentiate between different events and their associated payloads.
 
 ```ocaml
 # Runtime_events.Callbacks.create;;
@@ -239,6 +248,13 @@ Olly also has a tracing mode to output the runtime trace in a Chrome-trace compa
 $ olly trace fib.trace "fib 2"
 ```
 
-This produces a trace of the program using the phase events. You can see [this example trace run](./docs/fib.trace) using two domains to calculate fibonacci. This can also be view in the [perfetto trace viewer]().
+This produces a trace of the program using the phase events. You can see [this example trace run](./docs/fib.trace) using two domains to calculate fibonacci. This can also be view in the [perfetto trace viewer](https://ui.perfetto.dev/).
 
 ![A trace of the fibonacci program showing two threads running together with flamegraphs indicating different phases of the compiler.](./docs/fib-trace.png)
+
+## Eio-console
+
+The Runtime Events library is written in such a way as to be as generic as possible. The core principle is that [even in the presence of custom events](https://github.com/ocaml/ocaml/pull/11474), a consumer of Runtime Events should still work. This makes it possible to write library-specific consumer programs. 
+
+[Eio-console](https://github.com/patricoferris/eio-console) was built with the idea to display custom events for the direct-style, IO library [Eio](https://github.com/ocaml-multicore/eio). It was built before we had a custom events PR. Eio-console does show how you can write more complicated interfaces on top of Runtime Events.
+
