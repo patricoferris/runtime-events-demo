@@ -1,7 +1,7 @@
 Runtime Events Workshop Demo
 ----------------------------
 
-A repository containing the source code for the Runtime Events Workshop demo presented at the [OCaml Workshop](https://icfp22.sigplan.org/home/ocaml-2022) as part of [ICFP 2022](https://icfp22.sigplan.org/) by [Sadiq Jaffer](https://github.com/sadiqj) and [Patrick Ferris](https://github.com/patricoferris).
+A repository containing the source code for the Runtime Events Workshop demo presented at the [OCaml Workshop](https://icfp22.sigplan.org/home/ocaml-2022) as part of [ICFP 2022](https://icfp22.sigplan.org/) by [Sadiq Jaffer](https://github.com/sadiqj) and [Patrick Ferris](https://github.com/patricoferris). The [abstract](./abstract.pdf) is available too.
 
 - [Runtime Events Workshop Demo](#runtime-events-workshop-demo)
 - [Setup](#setup)
